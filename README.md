@@ -51,20 +51,20 @@ JavaScript’s Date.parse() method. For example:
 
 #### The ISO 8601 format:
 
-<pre>const deadline = '2015-12-31';</pre>
+<pre>const deadline = '2025-12-31';</pre>
 
 #### The short format:
 
-<pre>const deadline = '31/12/2015';</pre>
+<pre>const deadline = '31/12/2025';</pre>
 
 #### Or, the long format:
 
-<pre>const deadline = 'December 31 2015';</pre>
+<pre>const deadline = 'December 31 2025';</pre>
 
 Each of these formats allows you to specify an exact time and a time zone (or an offset from UTC 
 in the case of ISO dates). For example:
 
-<pre>const deadline = 'December 31 2015 23:59:59 GMT+0200';</pre>
+<pre>const deadline = 'December 31 2025 23:59:59 GMT+0200';</pre>
 
 You can read more about date formatting in JavaScript in this article.
 
@@ -115,6 +115,7 @@ Let’s break down what’s going on here.
 #### Output the Clock Data as a Reusable Object
 
 With the days, hours, minutes, and seconds prepared, we’re now ready to return the data as a reusable object:
+
 <pre>
 return {
   total,
@@ -145,16 +146,16 @@ Then we’ll write a function that outputs the clock data inside our new div:
 <pre>
 function initializeClock(id, endtime) {
   const clock = document.getElementById(id);
-  const timeinterval = setInterval(() => {
+  const timeinterval = setInterval(() =&gt; {
     const t = getTimeRemaining(endtime);
-    clock.innerHTML = 'days: ' + t.days + '<br>' +
-                      'hours: '+ t.hours + '<br>' +
-                      'minutes: ' + t.minutes + '<br>' +
+    clock.innerHTML = 'days: ' + t.days + '&lt;br&gt;' +
+                      'hours: '+ t.hours + '&lt;br&gt;' +
+                      'minutes: ' + t.minutes + '&lt;br&gt;' +
                       'seconds: ' + t.seconds;
     if (t.total <= 0) {
       clearInterval(timeinterval);
     }
-  },1000);
+  }, 1000);
 }
 </pre>
 
@@ -191,18 +192,18 @@ Let’s move the anonymous function that we’re passing to setInterval into its
 
 In your JavaScript, replace this:
 
-<pre>const timeinterval = setInterval(() => { ... },1000);</pre>
+<pre>const timeinterval = setInterval(() =&gt; { ... }, 1000);</pre>
 
 With this:
 
 <pre>
 function updateClock(){
   const t = getTimeRemaining(endtime);
-  clock.innerHTML = 'days: ' + t.days + '<br>' +
-                    'hours: '+ t.hours + '<br>' +
-                    'minutes: ' + t.minutes + '<br>' +
+  clock.innerHTML = 'days: ' + t.days + '&lt;br&gt;' +
+                    'hours: '+ t.hours + '&lt;br&gt;' +
+                    'minutes: ' + t.minutes + '&lt;br&gt;' +
                     'seconds: ' + t.seconds;
-  if (t.total <= 0) {
+  if (t.total &lt;= 0) {
     clearInterval(timeinterval);
   }
 }
@@ -290,16 +291,16 @@ Next we can specify the dates between which the clock should show up. This will 
 
 <pre>
 const schedule = [
-    ['Jul 25 2015', 'Sept 20 2015'],
-    ['Sept 21 2015', 'Jul 25 2016'],
-    ['Jul 25 2016', 'Jul 25 2030']
+    ['Jul 25 2025', 'Sept 20 2025'],
+    ['Sept 21 2025', 'Jul 25 2026'],
+    ['Jul 25 2026', 'Jul 25 2030']
 ];
 </pre>
 
 Each element in the schedule array represents a start date and an end date. As noted above, it is possible to include times and time zones, but I used plain dates here to keep the code readable.
 
 Finally, when a user loads the page, we need to check if we are within any of the specified time frames. This code should replace the previous call to the initializeClock function.
-
+<pre>
 // iterate over each element in the schedule
 for (var i=0; i<schedule.length; i++) {
   var startDate = schedule[i][0];
@@ -311,22 +312,23 @@ for (var i=0; i<schedule.length; i++) {
   var currentMs = Date.parse(new Date());
 
   // if current date is between start and end dates, display clock
-  if (endMs > currentMs && currentMs >= startMs ) {
+  if (endMs > currentMs && currentMs &gt;= startMs ) {
     initializeClock('clockdiv', endDate);
   }
 }
 
-schedule.forEach(([startDate, endDate]) => {
+schedule.forEach(([startDate, endDate]) =&gt; {
   // put dates in milliseconds for easy comparisons
   const startMs = Date.parse(startDate);
   const endMs = Date.parse(endDate);
   const currentMs = Date.parse(new Date());
 
   // if current date is between start and end dates, display clock
-  if (endMs > currentMs && currentMs >= startMs ) {
+  if (endMs &gt; currentMs && currentMs &gt;= startMs ) {
     initializeClock('clockdiv', endDate);
   }
 });
+</pre>
 Now you can schedule your clock in advance without having to update it by hand. You may shorten the code if you wish. I made mine verbose for the sake of readability.
 
 Set Timer for 10 Minutes from When the User Arrives
