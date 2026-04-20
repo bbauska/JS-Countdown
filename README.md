@@ -221,12 +221,12 @@ inside a span tag and only update the content of those spans.
 Here’s the HTML:
 
 <pre>
-<div id="clockdiv">
-    Days: <span class="days"></span><br>
-    Hours: <span class="hours"></span><br>
-    Minutes: <span class="minutes"></span><br>
-    Seconds: <span class="seconds"></span>
-</div>
+&lt;div id="clockdiv"&gt;
+    Days: &lt;span class="days"&gt;&lt;/span&gt;&lt;br&gt;
+    Hours: &lt;span class="hours"&gt;&lt;/span&lt;&gt;br&gt;
+    Minutes: &lt;span class="minutes"&gt;&lt;/span&gt;&lt;br&gt;
+    Seconds: &lt;span class="seconds"&gt;&lt;/span&gt;
+&lt;/div&gt;
 </pre>
 
 Now let’s get a reference to those elements. Add the following code right after where the clock variable is defined
