@@ -74,7 +74,7 @@ representing a given end time (as outlined above). We then calculate the differe
 time and the current time. Here’s what that looks like:
 
 <pre>
-function getTimeRemaining(endtime){
+function getTimeRemaining(endtime) {
   const total = Date.parse(endtime) - Date.parse(new Date());
   const seconds = Math.floor( (total/1000) % 60 );
   const minutes = Math.floor( (total/1000/60) % 60 );
@@ -138,7 +138,7 @@ Convenient, right?
 Now that we have a function that spits out the days, hours, minutes, and seconds remaining, we can build our clock. First we’ll create the following HTML element to hold our clock:
 
 <pre>
-<div id="clockdiv"></div>
+&lt;div id="clockdiv"&gt;&lt;/div&gt;
 </pre>
 
 Then we’ll write a function that outputs the clock data inside our new div:
@@ -152,7 +152,7 @@ function initializeClock(id, endtime) {
                       'hours: '+ t.hours + '&lt;br&gt;' +
                       'minutes: ' + t.minutes + '&lt;br&gt;' +
                       'seconds: ' + t.seconds;
-    if (t.total <= 0) {
+    if (t.total &lt;= 0) {
       clearInterval(timeinterval);
     }
   }, 1000);
